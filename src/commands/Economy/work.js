@@ -5,10 +5,10 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { logger } from '../../utils/logger.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const WORK_COOLDOWN = 30 * 60 * 1000;
+const WORK_COOLDOWN = 10 * 30 * 100;
 const MIN_WORK_AMOUNT = 50;
-const MAX_WORK_AMOUNT = 300;
-const LAPTOP_MULTIPLIER = 1.5;
+const MAX_WORK_AMOUNT = 5000;
+const LAPTOP_MULTIPLIER = 4.5;
 const WORK_JOBS = [
     "Software Developer",
     "Barista",
@@ -78,7 +78,7 @@ export default {
             let multiplierMessage = "";
             if (hasLaptop > 0) {
                 earned = Math.floor(earned * LAPTOP_MULTIPLIER);
-                multiplierMessage = "\n💻 **Laptop Bonus:** +50% earnings!";
+                multiplierMessage = "\n💻 **Laptop Bonus:** +100% earnings!";
             }
 
             userData.wallet = (userData.wallet || 0) + earned;
@@ -109,7 +109,7 @@ export default {
                     },
                     {
                         name: "⏰ Next Work",
-                        value: `<t:${Math.floor((now + WORK_COOLDOWN) / 1000)}:R>`,
+                        value: `<t:${Math.floor((now + WORK_COOLDOWN) / 100)}:R>`,
                         inline: true,
                     }
                 )
