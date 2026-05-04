@@ -25,14 +25,14 @@ import { wrapServiceClassMethods } from '../utils/serviceErrorBoundary.js';
 class EconomyService {
   
   
-  static DAILY_COOLDOWN = 24 * 60 * 60 * 1000;
-  static WORK_COOLDOWN = 30 * 60 * 1000;
-  static GAMBLE_COOLDOWN = 5 * 60 * 1000;
-  static CRIME_COOLDOWN = 60 * 60 * 1000;
-  static ROB_COOLDOWN = 4 * 60 * 60 * 1000;
-  static MINE_COOLDOWN = 60 * 60 * 1000;
-  static FISH_COOLDOWN = 45 * 60 * 1000;
-  static BEG_COOLDOWN = 30 * 60 * 1000;
+  static DAILY_COOLDOWN = 24 * 60 * 60 * 100;
+  static WORK_COOLDOWN = 30 * 60 * 100;
+  static GAMBLE_COOLDOWN = 5 * 60 * 100;
+  static CRIME_COOLDOWN = 60 * 60 * 100;
+  static ROB_COOLDOWN = 4 * 60 * 60 * 100;
+  static MINE_COOLDOWN = 60 * 60 * 100;
+  static FISH_COOLDOWN = 45 * 60 * 100;
+  static BEG_COOLDOWN = 30 * 60 * 100;
   
   static DAILY_AMOUNT = 1000;
   static MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
