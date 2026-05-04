@@ -5,9 +5,9 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { MessageTemplates } from '../../utils/messageTemplates.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const FISH_COOLDOWN = 45 * 60 * 1000; 
-const BASE_MIN_REWARD = 300;
-const BASE_MAX_REWARD = 900;
+const FISH_COOLDOWN = 45 * 60 * 100; 
+const BASE_MIN_REWARD = 500;
+const BASE_MAX_REWARD = 1500;
 const FISHING_ROD_MULTIPLIER = 1.5;
 
 const FISH_TYPES = [
@@ -49,9 +49,9 @@ export default {
 
             if (now < lastFish + FISH_COOLDOWN) {
                 const remaining = lastFish + FISH_COOLDOWN - now;
-                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                const hours = Math.floor(remaining / (100 * 60 * 60));
                 const minutes = Math.floor(
-                    (remaining % (1000 * 60 * 60)) / (1000 * 60),
+                    (remaining % (100 * 60 * 60)) / (100 * 60),
                 );
 
                 throw createError(
@@ -93,7 +93,7 @@ export default {
             
             if (hasFishingRod > 0) {
                 finalEarned = Math.floor(baseEarned * FISHING_ROD_MULTIPLIER);
-                multiplierMessage = `\n🎣 **Fishing Rod Bonus: +50%**`;
+                multiplierMessage = `\n🎣 **Fishing Rod Bonus: +70%**`;
             }
 
             const catchMessage = CATCH_MESSAGES[Math.floor(Math.random() * CATCH_MESSAGES.length)];
@@ -128,7 +128,7 @@ export default {
                         inline: true,
                     }
                 )
-                .setFooter({ text: `Next fishing trip available in 45 minutes.` });
+                .setFooter({ text: `Next fishing trip available in 20 minutes.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'fish' })
