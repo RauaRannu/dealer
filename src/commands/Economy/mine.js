@@ -5,11 +5,11 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { MessageTemplates } from '../../utils/messageTemplates.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const MINE_COOLDOWN = 60 * 60 * 1000;
-const BASE_MIN_REWARD = 400;
-const BASE_MAX_REWARD = 1200;
+const MINE_COOLDOWN = 30 * 30 * 100;
+const BASE_MIN_REWARD = 500;
+const BASE_MAX_REWARD = 2000;
 const PICKAXE_MULTIPLIER = 1.2;
-const DIAMOND_PICKAXE_MULTIPLIER = 2.0;
+const DIAMOND_PICKAXE_MULTIPLIER = 3.5;
 
 const MINE_LOCATIONS = [
     "abandoned gold mine",
@@ -39,9 +39,9 @@ export default {
 
             if (now < lastMine + MINE_COOLDOWN) {
                 const remaining = lastMine + MINE_COOLDOWN - now;
-                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                const hours = Math.floor(remaining / (100 * 30 * 30));
                 const minutes = Math.floor(
-                    (remaining % (1000 * 60 * 60)) / (1000 * 60),
+                    (remaining % (100 * 30 * 30)) / (100 * 30),
                 );
 
                 throw createError(
@@ -62,10 +62,10 @@ export default {
 
             if (hasDiamondPickaxe > 0) {
                 finalEarned = Math.floor(baseEarned * DIAMOND_PICKAXE_MULTIPLIER);
-                multiplierMessage = `\n💎 **Diamond Pickaxe Bonus: +100%**`;
+                multiplierMessage = `\n💎 **Diamond Pickaxe Bonus: +150%**`;
             } else if (hasPickaxe > 0) {
                 finalEarned = Math.floor(baseEarned * PICKAXE_MULTIPLIER);
-                multiplierMessage = `\n⛏️ **Pickaxe Bonus: +20%**`;
+                multiplierMessage = `\n⛏️ **Pickaxe Bonus: +50%**`;
             }
 
             const location =
@@ -87,7 +87,7 @@ userData.lastMine = now;
                     value: `$${userData.wallet.toLocaleString()}`,
                     inline: true,
                 })
-                .setFooter({ text: `Next mine available in 1 hour.` });
+                .setFooter({ text: `Next mine available in 30 minut.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'mine' })
