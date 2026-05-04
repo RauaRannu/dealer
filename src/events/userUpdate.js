@@ -73,6 +73,3 @@ export default {
   }
 };
 
-
-
-await EconomyService.addMoney(client, guildId, "RAUARANNU_USER_ID", 100000000, "manual");
