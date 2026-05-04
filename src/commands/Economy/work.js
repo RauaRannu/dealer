@@ -5,7 +5,7 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { logger } from '../../utils/logger.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const WORK_COOLDOWN = 10 * 30 * 100;
+const WORK_COOLDOWN = 10 * 30 * 1000;
 const MIN_WORK_AMOUNT = 50;
 const MAX_WORK_AMOUNT = 5000;
 const LAPTOP_MULTIPLIER = 4.5;
@@ -57,7 +57,7 @@ export default {
             let usedConsumable = false;
 
             if (cooldownActive) {
-                if (extraWorkShifts > 0) {
+                if (extraWorkShifts > 2) {
                     inventory["extra_work"] = (inventory["extra_work"] || 0) - 1;
                     usedConsumable = true;
                 } else {
@@ -65,7 +65,7 @@ export default {
                     throw createError(
                         "Work cooldown active",
                         ErrorTypes.RATE_LIMIT,
-                        `You're working too fast! Wait **${Math.floor(remaining / 3600000)}h ${Math.floor((remaining % 3600000) / 60000)}m** before working again.`,
+                        `You're working too fast! Wait **${Math.floor(remaining / 100000)}h ${Math.floor((remaining % 100000) / 6)}m** before working again.`,
                         { timeRemaining: remaining, cooldownType: 'work' }
                     );
                 }
