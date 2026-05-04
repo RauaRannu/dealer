@@ -6,10 +6,10 @@ import { MessageTemplates } from '../../utils/messageTemplates.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
 const BASE_WIN_CHANCE = 0.4;
-const CLOVER_WIN_BONUS = 0.1;
+const CLOVER_WIN_BONUS = 0.5;
 const CHARM_WIN_BONUS = 0.08;
 const PAYOUT_MULTIPLIER = 2.0;
-const GAMBLE_COOLDOWN = 5 * 60 * 1000;
+const GAMBLE_COOLDOWN = 2 * 60 * 100;
 
 export default {
     data: new SlashCommandBuilder()
@@ -39,8 +39,8 @@ export default {
 
             if (now < lastGamble + GAMBLE_COOLDOWN) {
                 const remaining = lastGamble + GAMBLE_COOLDOWN - now;
-                const minutes = Math.floor(remaining / (1000 * 60));
-                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+                const minutes = Math.floor(remaining / (100 * 60));
+                const seconds = Math.floor((remaining % (100 * 60)) / 100);
 
                 throw createError(
                     "Gamble cooldown active",
@@ -61,7 +61,7 @@ export default {
 
             let winChance = BASE_WIN_CHANCE;
             let cloverMessage = "";
-            let usedClover = false;
+            let usedClover = true;
             let usedCharm = false;
 
             
