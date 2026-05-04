@@ -22,7 +22,7 @@ export default {
                     embed.addFields({
                         name: `${item.name} (${item.id})`,
                         value: `🏷️ **Type:** ${item.type}\n💚 **Price:** $${item.price.toLocaleString()}\n${item.description}`,
-                        inline: false,
+                        inline: true,
                     });
                 });
                 embed.setFooter({ text: `Page ${page}/${totalPages}` });
